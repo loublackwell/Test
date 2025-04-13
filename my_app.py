@@ -1,2 +1,3 @@
 import streamlit as st
-st.write("Hello World")
+st.sidebar.title("RAG-Demo")
+
