@@ -1,1 +1,2 @@
-chromadb
+faiss-cpu
+sentence-transformers
