@@ -283,7 +283,7 @@ error=True
 question=st.sidebar.text_input("Enter Question")
 if question!="":
     results, verses, IDS, verse_dict = query_texts(question, top_k=25)
-    st.text(verses)
+    #st.text(verses)
 
     task=build_prompt(expert,verses)#Build prompt for LLM
     
