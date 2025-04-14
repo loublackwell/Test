@@ -210,10 +210,11 @@ def parse_query(out,verse_dict):
     start=out.find("```")
     if start>-1:
         start_block=out[start+3:]
-        if start>=0:
+        if start>-1:
             end_block=start_block.find("```")
-            if end_block>=0:
+            if end_block>-1:
                 middle_block=start_block[:end_block]
+                st.text(middle_block)
                 json_start=middle_block.find("{")
                 if json_start>=0:
                     json_end=middle_block.rfind("}")
