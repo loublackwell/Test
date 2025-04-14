@@ -202,7 +202,9 @@ def conlcusion(question,answers):
 
 
 def parse_query(out,verse_dict):
-    out=out.replace('\n','')
+    out1=out.replace('\n','')
+    out=out1.replace("'",'"')
+    
     error=False
     dict_block={}
     report_dict={}
