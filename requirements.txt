@@ -1,5 +1,5 @@
 faiss-cpu==1.7.4
 sentence-transformers==2.2.2
 numpy==1.26.4
-google-generativeai
+google-genai
 huggingface_hub==0.20.3 #or the latest stable version.
