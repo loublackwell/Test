@@ -93,8 +93,7 @@ def query_texts(query_text, top_k):
 
     for i in indices[0]:
         ID=metadata_store[i][0]#ID
-        doc1=metadata_store[i][1].strip().replace("\n","\\n")#Document
-        doc=doc1.replace('"','\\"')                      
+        doc=metadata_store[i][1].strip().replace("\n","\\n")#Document                
         metadata=metadata_store[i][2]
         ids.append(ID)
         documents.append(doc)
