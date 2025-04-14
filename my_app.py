@@ -9,6 +9,7 @@ import google.generativeai as genai
 
 #Declaration of variables
 global my_key
+global book
 cwd=os.getcwd()#Current working Directory
 tika_jar_path=os.path.join("tika_jar_file","tika-app-2.9.3.jar")#Relative path to tika jar file
 file_path = os.path.join(cwd,"en_GC.pdf")#Path to PDF file
