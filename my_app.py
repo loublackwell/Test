@@ -213,9 +213,6 @@ def conlcusion(question,answers):
 
 
 def parse_query(out,verse_dict):
-    verify_back_ticks=out.count("```")
-    st.write( verify_back_ticks)
-    
     out=out.strip()
     error=False
     dict_block={}
@@ -290,6 +287,8 @@ if question!="":
     task=build_prompt(expert,verses)#Build prompt for LLM
     
     out,query_state=query_gemini(task)#HANDLE LLM QUERY ERROR
+    verify_back_ticks=out.count("```")
+    st.write( verify_back_ticks)
     st.write(out)
 """"
     #out,query_state=retry_query(task)
