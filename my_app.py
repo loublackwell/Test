@@ -202,6 +202,7 @@ def conlcusion(question,answers):
 
 
 def parse_query(out,verse_dict):
+    error=False
     dict_block={}
     report_dict={}
     answers=[]
@@ -226,7 +227,7 @@ def parse_query(out,verse_dict):
                     except Exception as e:
                         print(f"Unable to parse llm output: {e}")
                         error=True
-    return dict_block,answers,report_dict
+    return dict_block,answers,report_dict,error
 
 
 # ---- Example Usage ---- #
@@ -253,6 +254,7 @@ expert=st.secrets["EXPERT_KEY"]#Title of the virtual expert I am using to evalua
 
 load_index()
 answers_with_ids=[]
+error=False
 # Step 3: Ask a question
 #question = "who is the antichrist"
 question=st.sidebar.text_input("Enter Question")
@@ -262,7 +264,7 @@ if question!="":
     task=build_prompt(expert,verses)
     out=query_gemini(task)
     #print(out)
-    llm_dict1,answers1,report_dict1=parse_query(out,verse_dict)
+    llm_dict1,answers1,report_dict1,error=parse_query(out,verse_dict)
     
     for key,value in report_dict1.items():
         ID=f"{key}. {value}"
@@ -270,6 +272,6 @@ if question!="":
         answers_with_ids.append(ID)
     task2=conlcusion(question,answers_with_ids)
     out=query_gemini(task2)
-    llm_dict2,answers2,report_dict2=parse_query(out,verse_dict)
+    llm_dict2,answers2,report_dict2,error=parse_query(out,verse_dict)
     st.write(llm_dict2)
 
