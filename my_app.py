@@ -107,8 +107,8 @@ def query_texts(query_text, top_k):
 
     verse_dict = {}
     for i in range(len(ids)):
-        docs1=documents[i].strip().replace('"',"'")#Replace double quotes with single quotes.
-        docs=docs1.replace("\n","\\n")
+        docs=documents[i].strip().replace('"',"'")#Replace double quotes with single quotes.
+        #docs=docs1.replace("\n","\\n")
         verse_dict[docs] = ids[i]
 
     return results, documents, ids, verse_dict
