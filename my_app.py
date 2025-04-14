@@ -220,7 +220,7 @@ def parse_query(out,verse_dict):
                 if json_start>-1:
                     json_end=middle_block.rfind("}")
                     if json_end>-1:
-                        pydict1=middle_block[json_start:json_end+1]
+                        pydict=middle_block[json_start:json_end+1]
                         #pydict=pydict1.replace('\\','\\\\')
                         st.text(pydict)
                         
