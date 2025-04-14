@@ -201,7 +201,8 @@ def conlcusion(question,answers):
 
 
 def parse_query(out,verse_dict):
-    #out=out.strip()
+    out=str(out)#Force output to be a string in case llm changes output type due hallucination
+    out=out.strip()
     st.text(type(out))
     error=False
     dict_block={}
