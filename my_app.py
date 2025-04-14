@@ -249,11 +249,11 @@ def parse_query(out,verse_dict):
 def retry_query(task):
     #Query LLM and retry twice if there is an error.
     error_counter=0
-    query_state="error":
-        while query_state=="error" and error_counter<3:
-            error_counter+=1
-            out,query_state=query_gemini(task)#Query LLM
-        return out,query_state
+    query_state="error"
+    while query_state=="error" and error_counter<3:
+        error_counter+=1
+        out,query_state=query_gemini(task)#Query LLM
+    return out,query_state
         
 
 
