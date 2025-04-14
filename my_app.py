@@ -208,30 +208,31 @@ def parse_query(out,verse_dict):
     report_dict={}
     answers=[]
     start=out.find("```")
-    st.text(start)
-    start_block=out[start+3:]
-    if start>=0:
-        end_block=start_block.find("```")
-        if end_block>=0:
-            middle_block=start_block[:end_block]
-            json_start=middle_block.find("{")
-            if json_start>=0:
-                json_end=middle_block.rfind("}")
-                if json_end>=0:
-                    try:
-                        dict_block=json.loads(middle_block[json_start:json_end+1])#Try and read LLM output
-                        answers=dict_block.get('ANSWER')
-                        if answers!=None:
-            
-                            for text,verse in verse_dict.items():
-                                if text in answers:
-                                    report_dict[verse]=text
-                    except Exception as e:
-                        print(f"Unable to parse llm output: {e}: {out}")
-                        st.text(e)
-                        st.write(out)                       
-                        error=True
-                        
+    if start>-1:
+        start_block=out[start+3:]
+        if start>=0:
+            end_block=start_block.find("```")
+            if end_block>=0:
+                middle_block=start_block[:end_block]
+                json_start=middle_block.find("{")
+                if json_start>=0:
+                    json_end=middle_block.rfind("}")
+                    if json_end>=0:
+                        try:
+                            dict_block=json.loads(middle_block[json_start:json_end+1])#Try and read LLM output
+                            answers=dict_block.get('ANSWER')
+                            if answers!=None:
+                
+                                for text,verse in verse_dict.items():
+                                    if text in answers:
+                                        report_dict[verse]=text
+                        except Exception as e:
+                            print(f"Unable to parse llm output: {e}: {out}")
+                            st.text(e)
+                            st.write(out)
+                            st.text(type(out))
+                            error=True
+                            
     return dict_block,answers,report_dict,error
 
 def retry_query(task):
