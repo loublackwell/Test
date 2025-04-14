@@ -225,7 +225,7 @@ def parse_query(out,verse_dict):
                                 if text in answers:
                                     report_dict[verse]=text
                     except Exception as e:
-                        print(f"Unable to parse llm output: {e}")
+                        print(f"Unable to parse llm output: {e}: {out}")
                         st.text(e)
                         
                         error=True
