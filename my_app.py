@@ -201,7 +201,7 @@ def conlcusion(question,answers):
 
 
 def parse_query(out,verse_dict):
-    out=str(out)#Force output to be a string in case llm changes output type due hallucination
+    out=str(out)#Force output to be a string in case llm changes output type due hallucination**
     out=out.strip()
     st.text(type(out))
     error=False
@@ -287,7 +287,7 @@ if question!="":
     if query_state!="error":
         #Attempt to parse LLM output
         llm_dict1,answers1,report_dict1,error=parse_query(out,verse_dict)#Parse answers from LLM.
-        st.text(llm_dict1)
+        #st.text(llm_dict1)
 
         for key,value in report_dict1.items():
             ID=f"{key}. {value}"
@@ -298,7 +298,7 @@ if question!="":
         
         #Generate Conclusion/Summary given the answers
         out=query_gemini(task2)
-        st.text(out)
+        #st.text(out)
 
         llm_dict2,answers2,report_dict2,error=parse_query(out,verse_dict)#HANDLE PARSE ERROR
         st.write(llm_dict2)
