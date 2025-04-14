@@ -244,6 +244,41 @@ def parse_query(out,verse_dict):
     return dict_block,answers,report_dict,error
 
 
+def parse_query(out,verse_dict):
+    out=str(out)#Force output to be a string in case llm changes output type due hallucination**
+    out = out.replace("“", '"').replace("”", '"')
+    out=out.strip()
+    error=False
+    dict_block={}
+    report_dict={}
+    answers=[]
+    pydict=""
+    start=out.find("```")
+    if start>-1:
+        start_block=out[start+3:]
+        if start>-1:
+            end_block=start_block.find("```")
+            if end_block>-1:
+                middle_block=start_block[:end_block]
+                #st.text(middle_block)
+                json_start=middle_block.find("{")
+                if json_start>-1:
+                    json_end=middle_block.rfind("}")
+                    if json_end>-1:
+                        pydict=middle_block[json_start:json_end+1]
+                        #pydict=pydict1.replace('\\','\\\\')
+                        st.text(f"PARSE:{pydict}")
+                        dict_block=json.loads(pydict)#Try and read LLM output
+
+
+                        
+    return dict_block,answers,report_dict,error
+
+
+
+
+
+
 
 def retry_query(task):
     #Query LLM and retry twice if there is an error.
