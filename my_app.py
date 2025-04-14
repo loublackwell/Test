@@ -290,13 +290,15 @@ if question!="":
     verify_back_ticks=out.find("```")
     st.write( verify_back_ticks)
     st.text(out)
-""""
+    
     #out,query_state=retry_query(task)
 
     #Process if there is no error from the LLM
     if query_state!="error":
         #Attempt to parse LLM output
         llm_dict1,answers1,report_dict1,error=parse_query(out,verse_dict)#Query LLM
+        
+"""
         for key,value in report_dict1.items():
             ID=f"{key}. {value}"
             #ID={"id":key,"text":value}
