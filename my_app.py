@@ -92,9 +92,14 @@ def query_texts(query_text, top_k):
     dists = []
 
     for i in indices[0]:
-        ids.append(metadata_store[i][0])
-        documents.append(metadata_store[i][1])
-        metadatas.append(metadata_store[i][2])
+        ID=metadata_store[i][0]#ID
+        doc1=metadata_store[i][1.strip().replace("\n","\\n")#Document
+        doc=doc1.replace('"',"'")                      
+        metadata=metadata_store[i][2]
+        ids.append(ID)
+        documents.append(doc)
+        metadatas.append(metadata)
+                              
     for d in distances[0]:
         dists.append(d)
 
@@ -107,8 +112,7 @@ def query_texts(query_text, top_k):
 
     verse_dict = {}
     for i in range(len(ids)):
-        docs=documents[i].strip().replace('"',"'")#Replace double quotes with single quotes.
-        #docs=docs1.replace("\n","\\n")
+        docs=documents[i]
         verse_dict[docs] = ids[i]
 
     return results, documents, ids, verse_dict
@@ -188,10 +192,10 @@ def conlcusion(question,answers):
                     f. Ensure that all strings within the arrays are properly formatted and escaped if necessary.
                     g. Do not include any trailing commas.
                     h. If you are unable to provide the requested information, return an empty JSON object: {{"ANSWER":[],"JUSTIFICATION":[]}}.
-                    i. The final output json or python dictionary should be enclise with triple backyicks as shown in the output format.
-                    j. All key and value pairs hould be enclosed with double quotes.
+                    i. The final output json or python dictionary should be enclosed between two  triple backticks as shown in the output format.
+                    j. All key and value pairs hould be enclosed with double quotes only.
                     
-                 7. Do not provide/derive any answers that were not originally mentioned in the potential answers
+                 7. Do not provide/derive any answers that were not originally mentioned in the potential answers.
                  8. List the texts that you used to come to the answers.
                  9. If the question or task is not clear, state that in the ANSWER when returning your answer.
                  10. Provide concise answers whenever possible.
@@ -209,8 +213,7 @@ def conlcusion(question,answers):
 def parse_query(out,verse_dict):
     out=out.strip()
     out1=out.replace('\n','')
-    
-    
+   
     error=False
     dict_block={}
     report_dict={}
