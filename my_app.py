@@ -239,7 +239,7 @@ def parse_query(out,verse_dict):
                                 st.text(f"Exception:{pydict}")
                             st.text(type(out))
                             error=True
-                            
+        st.text(f"ANSWERS:{answers}")                        
     return dict_block,answers,report_dict,error
 
 
@@ -291,14 +291,14 @@ if question!="":
     out,query_state=query_gemini(task)
     st.text(f"STATE:{query_state}")
     
-"""   
+
 
     #Process if there is no error from the LLM
     if query_state!="error":
         #Attempt to parse LLM output
         llm_dict1,answers1,report_dict1,error=parse_query(out,verse_dict)#Parse answers from LLM.
         #st.text(llm_dict1)
-
+"""
 
 
         for key,value in report_dict1.items():
