@@ -224,7 +224,7 @@ def parse_query(out,verse_dict):
 
 
 #Set UI
-st.sidebar.title("Blackwell's Document Analyzer")
+st.title("Blackwell's Document Analyzer")
 st.caption("AI-powered insights from *The Great Controversy*")  
 
 
