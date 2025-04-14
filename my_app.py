@@ -126,6 +126,21 @@ def query_gemini(task):
     return TEXT
 
 
+def query_gemini(task):
+    # Query LLM
+    try:
+        # Pass the API key directly as a string, not as a dictionary
+        client = genai.Client(api_key=st.secrets["API_KEY"])
+
+        response = client.models.generate_content(
+            model="gemini-2.0-flash", contents=task
+        )
+        TEXT = response.text
+    except Exception as e:
+        st.write(f"Unable to query llm: {e}")
+        response = ""
+        TEXT = ""
+    return TEXT
 
 
 def build_prompt(expert,verses):
