@@ -94,7 +94,7 @@ def query_texts(query_text, top_k):
     for i in indices[0]:
         ID=metadata_store[i][0]#ID
         doc1=metadata_store[i][1].strip().replace("\n","\\n")#Document
-        doc=doc1.replace('"',"'")                      
+        doc=doc1.replace('"','\\"')                      
         metadata=metadata_store[i][2]
         ids.append(ID)
         documents.append(doc)
@@ -239,7 +239,7 @@ def parse_query(out,verse_dict):
                     except Exception as e:
                         print(f"Unable to parse llm output: {e}: {out}")
                         st.text(e)
-                        st.write(out.replace('"',"'"))
+                        st.write(out)
                         
                         error=True
     return dict_block,answers,report_dict,error
