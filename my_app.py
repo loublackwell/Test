@@ -202,6 +202,7 @@ def conlcusion(question,answers):
 
 
 def parse_query(out,verse_dict):
+    error=False
     dict_block={}
     report_dict={}
     answers=[]
@@ -215,15 +216,18 @@ def parse_query(out,verse_dict):
             if json_start>=0:
                 json_end=middle_block.rfind("}")
                 if json_end>=0:
-                    dict_block=json.loads(middle_block[json_start:json_end+1])#Try and read LLM output
-                    answers=dict_block.get('ANSWER')
-                    if answers!=None:
+                    try:
+                        dict_block=json.loads(middle_block[json_start:json_end+1])#Try and read LLM output
+                        answers=dict_block.get('ANSWER')
+                        if answers!=None:
             
-                        for text,verse in verse_dict.items():
-                            if text in answers:
-                                report_dict[verse]=text
-                
-    return dict_block,answers,report_dict
+                            for text,verse in verse_dict.items():
+                                if text in answers:
+                                    report_dict[verse]=text
+                    except Exception as e:
+                        print(f"Unable to parse llm output: {e}")
+                        error=True
+    return dict_block,answers,report_dict,error
 
 
 # ---- Example Usage ---- #
@@ -259,13 +263,15 @@ if question!="":
     task=build_prompt(expert,verses)
     out=query_gemini(task)
     #print(out)
-    llm_dict1,answers1,report_dict1=parse_query(out,verse_dict)
-    for key,value in report_dict1.items():
-        ID=f"{key}. {value}"
-        #ID={"id":key,"text":value}
-        answers_with_ids.append(ID)
-    task2=conlcusion(question,answers_with_ids)
-    out=query_gemini(task2)
-    llm_dict2,answers2,report_dict2=parse_query(out,verse_dict)
-    st.write(llm_dict2)
+    llm_dict1,answers1,report_dict1,error=parse_query(out,verse_dict)
+    
+    if error!=False:
+        for key,value in report_dict1.items():
+            ID=f"{key}. {value}"
+            #ID={"id":key,"text":value}
+            answers_with_ids.append(ID)
+        task2=conlcusion(question,answers_with_ids)
+        out=query_gemini(task2)
+        llm_dict2,answers2,report_dict2=parse_query(out,verse_dict)
+        st.write(llm_dict2)
 
