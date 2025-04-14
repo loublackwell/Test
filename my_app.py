@@ -225,7 +225,7 @@ def parse_query(out,verse_dict):
                         st.text(f"PARSE:{pydict}")
                         
                         try:
-                            dict_block=json.loads(pydict)#Try and read LLM output
+                            dict_block=eval(pydict)#Try and read LLM output
                             answers=dict_block.get('ANSWER')
                             if answers!=None:
                 
