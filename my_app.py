@@ -213,9 +213,10 @@ def conlcusion(question,answers):
 
 
 def parse_query(out,verse_dict):
+    verify_back_ticks=out.count("```")
+    st.write( verify_back_ticks)
+    
     out=out.strip()
-    out1=out.replace('\n','')
-   
     error=False
     dict_block={}
     report_dict={}
