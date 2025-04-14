@@ -291,9 +291,9 @@ if question!="":
             #ID={"id":key,"text":value}
             answers_with_ids.append(ID)
         task2=conlcusion(question,answers_with_ids)
+        st.text(task2)
         
         #Generate Conclusion/Summary given the answers
-        st.text(task2)
         out=query_gemini(task2)
         st.text(out)
 """
