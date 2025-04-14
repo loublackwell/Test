@@ -301,7 +301,7 @@ if question!="":
 
 
         for key,value in report_dict1.items():
-            value=value.replace('"',"`")
+            value=value.replace("\'","'")
             ID=f"{key}. {value}"
             #ID={"id":key,"text":value}
             answers_with_ids.append(ID)
