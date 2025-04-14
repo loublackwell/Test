@@ -190,7 +190,6 @@ def conlcusion(question,answers):
                  7. If the question or task is not clear, state that in the ANSWER when returning your answer.
                  8. Provide concise answers whenever possible.
                  9. Remove any duplicate answers.
-                 10. Do not escape any of the characters.
                 
 
                 OUTPUT FORMAT:
