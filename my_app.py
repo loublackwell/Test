@@ -180,25 +180,17 @@ def conlcusion(question,answers):
                  3. Only use the list of text to search for answers
                  4. The output should be a valid python dictionary or JSON format
                  5. Here is an example of a valid python dictionary or JSON output and an example of an invalid python dictionary or invalid JSON output
-                     EXAMPLE OF VALID PYTHON DICTIONARY OR JSON OUTPUT:
+                     AN EXAMPLE OF VALID PYTHON DICTIONARY OR JSON OUTPUT:
                      {{"ANSWER":"George Washington was an president","JUSTIFICATION":["George washington was the president of United Stated hundreds of years ago"]}}
 
-                     EXAMPLE OF INVALID PYTHON DICTIONARY OR INVALID JSON OUTPUT:
+                     AN EXAMPLE OF INVALID PYTHON DICTIONARY OR INVALID JSON OUTPUT:
                      {{"ANSWER":"George Washington was an president","JUSTIFICATION":["George washington was the president of United Stated hundreds of years ago"]
-                 6. For the JSON output to be valid, adhere to the following rules:
-                    a. The output must be a valid JSON object (dictionary) enclosed within curly braces {{}}.
-                    b. The JSON object must contain the keys "ANSWER" and "JUSTIFICATION".
-                    c. The value associated with the "ANSWER" key should be an array of strings.
-                    d. The value associated with the "JUSTIFICATION" key should be an array of strings.
-                    e. Do not include any text outside of the JSON object.
-                    f. Ensure that all strings within the arrays are properly formatted and escaped if necessary.
-                    g. Do not include any trailing commas.
                     
-                 7. Do not provide/derive any answers that were not originally mentioned in the potential answers.
-                 8. List the texts that you used to come to the answers.
-                 9. If the question or task is not clear, state that in the ANSWER when returning your answer.
-                 10. Provide concise answers whenever possible.
-                 11. Remove any duplicate answers.
+                 8. Do not provide/derive any answers that were not originally mentioned in the potential answers.
+                 9. List the texts that you used to come to the answers.
+                 10. If the question or task is not clear, state that in the ANSWER when returning your answer.
+                 11. Provide concise answers whenever possible.
+                 12. Remove any duplicate answers.
                 
 
                 OUTPUT FORMAT:
