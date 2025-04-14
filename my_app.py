@@ -289,7 +289,7 @@ if question!="":
     out,query_state=query_gemini(task)#HANDLE LLM QUERY ERROR
     verify_back_ticks=out.find("```")
     st.write( verify_back_ticks)
-    st.write(out)
+    st.text(out)
 """"
     #out,query_state=retry_query(task)
 
