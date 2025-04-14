@@ -236,20 +236,22 @@ expert="""You are a Seventh Day adventist theologian with a PHD in Divinity from
 load_index()
 answers_with_ids=[]
 # Step 3: Ask a question
-question = "who is the antichrist"
-results, verses, IDS, verse_dict = query_texts(question, top_k=25)
+#question = "who is the antichrist"
+question=st.sidebar.text_input("Enter Question")
+if question!="":
+    results, verses, IDS, verse_dict = query_texts(question, top_k=25)
 
-task=build_prompt(expert,verses)
-out=query_gemini(task)
-st.write(out)
-#print(out)
-llm_dict1,answers1,report_dict1=parse_query(out,verse_dict)
-for key,value in report_dict1.items():
-    ID=f"{key}. {value}"
-    #ID={"id":key,"text":value}
-    answers_with_ids.append(ID)
-task2=conlcusion(question,answers_with_ids)
-out=query_gemini(task2)
-llm_dict2,answers2,report_dict2=parse_query(out,verse_dict)
-st.write(llm_dict2)
+    task=build_prompt(expert,verses)
+    out=query_gemini(task)
+    st.write(out)
+    #print(out)
+    llm_dict1,answers1,report_dict1=parse_query(out,verse_dict)
+    for key,value in report_dict1.items():
+        ID=f"{key}. {value}"
+        #ID={"id":key,"text":value}
+        answers_with_ids.append(ID)
+    task2=conlcusion(question,answers_with_ids)
+    out=query_gemini(task2)
+    llm_dict2,answers2,report_dict2=parse_query(out,verse_dict)
+    st.write(llm_dict2)
 
