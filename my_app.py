@@ -214,7 +214,7 @@ def parse_query(out,verse_dict):
             end_block=start_block.find("```")
             if end_block>-1:
                 middle_block=start_block[:end_block]
-                st.text(middle_block)
+                #st.text(middle_block)
                 json_start=middle_block.find("{")
                 if json_start>-1:
                     json_end=middle_block.rfind("}")
@@ -223,7 +223,7 @@ def parse_query(out,verse_dict):
                         st.text(pydict)
                         
                         try:
-                            dict_block=json.loads(middle_block[json_start:json_end+1])#Try and read LLM output
+                            dict_block=json.loads(pydict)#Try and read LLM output
                             answers=dict_block.get('ANSWER')
                             if answers!=None:
                 
