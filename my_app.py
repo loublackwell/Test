@@ -313,5 +313,5 @@ if question!="":
         
         llm_dict2,answers2,report_dict2,error=parse_query(out,verse_dict)#HANDLE PARSE ERROR
 "'"
-       st.write(llm_dict2)
+        st.write(llm_dict2)
 """
