@@ -151,7 +151,8 @@ def build_prompt(expert,verses):
              1. No Hallucinations allowed. Stick with completing the task given the provided context.
              2. If there are no relevant text, return no relevant text
              3. Only use the list of text to serach for answers
-             4. The output should be a valid python dictionary
+             4. The output should be a valid python dictionary.
+             5. Do not escape any of the characters.
              
              
              OUTPUT FORMAT:
