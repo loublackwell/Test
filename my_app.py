@@ -220,7 +220,8 @@ def parse_query(out,verse_dict):
                 if json_start>-1:
                     json_end=middle_block.rfind("}")
                     if json_end>-1:
-                        pydict=middle_block[json_start:json_end+1]
+                        pydict1=middle_block[json_start:json_end+1]
+                        pydict=pydict1.replace('\\','\\\\')
                         st.text(pydict)
                         
                         try:
@@ -242,33 +243,7 @@ def parse_query(out,verse_dict):
                             
     return dict_block,answers,report_dict,error
 
-def parse_query(out, verse_dict):
-    out = str(out).strip()
-    error = False
-    dict_block = {}
-    report_dict = {}
-    answers = []
-    json_match = re.search(r"\{.*\}", out, re.DOTALL)  # Find JSON object
 
-    if json_match:
-        try:
-            json_string = json_match.group(0).replace("\n", "\\n") #escape newlines.
-            dict_block = json.loads(json_string)
-            answers = dict_block.get("ANSWER", [])
-
-            if answers:
-                for text, verse in verse_dict.items():
-                    if text in answers:
-                        report_dict[verse] = text
-
-        except json.JSONDecodeError as e:
-            st.write(f"Error parsing LLM output: {e}")
-            error = True
-    else:
-        st.write("No valid JSON found in LLM output.")
-        error = True
-
-    return dict_block, answers, report_dict, error
 
 def retry_query(task):
     #Query LLM and retry twice if there is an error.
