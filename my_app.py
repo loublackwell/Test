@@ -237,7 +237,7 @@ def parse_query(out,verse_dict):
                             st.text(e)
                             st.write(out)
                             if pydict!="":
-                                st.text(pydict)
+                                st.text(f"Exception:{pydict}")
                             st.text(type(out))
                             error=True
                             
@@ -297,7 +297,7 @@ if question!="":
     if query_state!="error":
         #Attempt to parse LLM output
         llm_dict1,answers1,report_dict1,error=parse_query(out,verse_dict)#Parse answers from LLM.
-        st.text(llm_dict1)
+        #st.text(llm_dict1)
 
 
 
