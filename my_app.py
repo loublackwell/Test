@@ -14,6 +14,7 @@ tika_jar_path=os.path.join("tika_jar_file","tika-app-2.9.3.jar")#Relative path t
 file_path = os.path.join(cwd,"en_GC.pdf")#Path to PDF file
 file_title = file_path.split("/")[-1]
 book = f"{file_title}_faiss_index"
+st.write(book)
 # Initialize FAISS index
 dimension = 384  # embedding dimension for all-MiniLM-L6-v2
 index = faiss.IndexFlatIP(dimension)  # Inner Product (used for cosine similarity)
