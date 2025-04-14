@@ -235,7 +235,6 @@ def parse_query(out,verse_dict):
                         except Exception as e:
                             st.write(f"Unable to parse llm output: {e}: {out}")
                             st.text(e)
-                            st.write(out)
                             if pydict!="":
                                 st.text(f"Exception:{pydict}")
                             st.text(type(out))
