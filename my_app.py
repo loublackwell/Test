@@ -111,22 +111,6 @@ def query_texts(query_text, top_k=5):
 
 
 def query_gemini(task):
-    #Query LLM
-    try:
-        client = genai.Client(api_key=my_key)
-
-        response = client.models.generate_content(
-            model="gemini-2.0-flash", contents=task
-        )
-        TEXT=response.text
-    except Exception as e:
-        st.write(f"Unable to query llm: {e}")
-        response=""
-        TEXT=""
-    return TEXT
-
-
-def query_gemini(task):
     # Query LLM
     try:
         # Pass the API key directly as a string, not as a dictionary
@@ -248,7 +232,7 @@ expert="""You are a Seventh Day adventist theologian with a PHD in Divinity from
           You also specialize in Ellen G. Whites Writings.  
             """
 
-"""
+
 load_index()
 answers_with_ids=[]
 # Step 3: Ask a question
@@ -268,4 +252,4 @@ task2=conlcusion(question,answers_with_ids)
 out=query_gemini(task2)
 llm_dict2,answers2,report_dict2=parse_query(out,verse_dict)
 st.write(llm_dict2)
-"""
+
