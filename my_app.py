@@ -82,7 +82,7 @@ def load_index():
         metadata_store = json.load(f)
 
 
-def query_texts(query_text, top_k=5):
+def query_texts(query_text, top_k):
     query_embedding = model.encode(query_text).reshape(1, -1).astype('float32')
     distances, indices = index.search(query_embedding, top_k)
 
@@ -107,7 +107,8 @@ def query_texts(query_text, top_k=5):
 
     verse_dict = {}
     for i in range(len(ids)):
-        verse_dict[documents[i]] = ids[i]
+        docs=documents[i].strip().replace('"',"'")#Replace double quotes with single quotes.
+        verse_dict[docs] = ids[i]
 
     return results, documents, ids, verse_dict
 
@@ -187,7 +188,7 @@ def conlcusion(question,answers):
                     g. Do not include any trailing commas.
                     h. If you are unable to provide the requested information, return an empty JSON object: {{"ANSWER":[],"JUSTIFICATION":[]}}.
                     i. The final output json or python dictionary should be enclise with triple backyicks as shown in the output format.
-                    j. If there are any quotations found inside of the text that are not a part of the key value pairs, replace with single quotes.
+                    j. All key and value pairs hould be enclosed with double quotes.
                     
                  7. Do not provide/derive any answers that were not originally mentioned in the potential answers
                  8. List the texts that you used to come to the answers.
