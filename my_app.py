@@ -242,10 +242,6 @@ def parse_query(out,verse_dict):
                             
     return dict_block,answers,report_dict,error
 
-import json
-import re
-import streamlit as st
-
 def parse_query(out, verse_dict):
     out = str(out).strip()
     error = False
