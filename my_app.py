@@ -199,7 +199,7 @@ def parse_query(out,verse_dict):
             if json_start>=0:
                 json_end=middle_block.rfind("}")
                 if json_end>=0:
-                    dict_block=eval(middle_block[json_start:json_end+1])
+                    dict_block=json.loads(middle_block[json_start:json_end+1])#Try and read LLM output
                     answers=dict_block.get('ANSWER')
                     if answers!=None:
             
