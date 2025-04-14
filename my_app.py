@@ -187,7 +187,7 @@ def conlcusion(question,answers):
                     g. Do not include any trailing commas.
                     h. If you are unable to provide the requested information, return an empty JSON object: {{"ANSWER":[],"JUSTIFICATION":[]}}.
                     i. The final output json or python dictionary should be enclise with triple backyicks as shown in the output format.
-                    j. If there are any quotations only use single quotes and not double quotes.
+                    j. If there are any quotations found inside of the text that are not a part of the key value pairs, replace with single quotes.
                     
                  7. Do not provide/derive any answers that were not originally mentioned in the potential answers
                  8. List the texts that you used to come to the answers.
