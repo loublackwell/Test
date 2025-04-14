@@ -21,8 +21,8 @@ metadata_store = []  # Will store tuples of (id, text, metadata)
 # Initialize sentence transformer model
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
-headers={
-                  "authorization":st.secrets["AUTH_TOKEN"],"content-type":"application/json"
+my_key={
+                  "authorization":st.secrets["API_KEY"],"content-type":"application/json"
                   }
 
 
