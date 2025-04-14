@@ -221,7 +221,7 @@ def parse_query(out,verse_dict):
                     json_end=middle_block.rfind("}")
                     if json_end>-1:
                         pydict1=middle_block[json_start:json_end+1]
-                        #pydict=pydict1.replace('\\','\\\\')
+                        pydict=pydict1.replace('\\','\\\\')
                         st.text(pydict)
                         
                         try:
@@ -235,7 +235,7 @@ def parse_query(out,verse_dict):
                         except Exception as e:
                             st.write(f"Unable to parse llm output: {e}: {out}")
                             st.text(e)
-                            #st.write(out)
+                            st.write(out)
                             if pydict!="":
                                 st.text(pydict)
                             st.text(type(out))
