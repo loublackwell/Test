@@ -207,6 +207,7 @@ def parse_query(out,verse_dict):
     report_dict={}
     answers=[]
     start=out.find("```")
+    st.text(start)
     start_block=out[start+3:]
     if start>=0:
         end_block=start_block.find("```")
