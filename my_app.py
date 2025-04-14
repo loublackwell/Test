@@ -296,7 +296,7 @@ if question!="":
     if query_state!="error":
         #Attempt to parse LLM output
         llm_dict1,answers1,report_dict1,error=parse_query(out,verse_dict)#Parse answers from LLM.
-       st.write(llm_dict1)
+        st.write(llm_dict1)
 
         for key,value in report_dict1.items():
             ID=f"{key}. {value}"
