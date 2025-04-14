@@ -198,7 +198,7 @@ def conlcusion(question,answers):
                     {{"ANSWER":[<insert summary here>],"JUSTIFICATION":[<list of text that you used to get the answer>]}}
 
                 """
-     return task2
+    return task2
 
 
 def parse_query(out,verse_dict):
