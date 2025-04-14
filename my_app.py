@@ -222,6 +222,8 @@ st.sidebar.title("RAG-Demo")
 expert="""You are a Seventh Day adventist theologian with a PHD in Divinity from Andrews Univeristy in Michigan.
           You also specialize in Ellen G. Whites Writings.  
             """
+st.write(exper)
+
 load_index()
 answers_with_ids=[]
 # Step 3: Ask a question
