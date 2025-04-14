@@ -120,7 +120,7 @@ def query_gemini(task):
         )
         TEXT=response.text
     except Exception as e:
-        print(f"Unable to query llm: {e}")
+        st.write(f"Unable to query llm: {e}")
         response=""
         TEXT=""
     return TEXT
@@ -227,7 +227,7 @@ task="how old is the python language"
 A=query_gemini(task)
 st.write(A)
 
-
+"""
 # Step 2: Load saved index
 expert="""You are a Seventh Day adventist theologian with a PHD in Divinity from Andrews Univeristy in Michigan.
           You also specialize in Ellen G. Whites Writings.  
@@ -252,3 +252,4 @@ task2=conlcusion(question,answers_with_ids)
 out=query_gemini(task2)
 llm_dict2,answers2,report_dict2=parse_query(out,verse_dict)
 st.write(llm_dict2)
+"""
