@@ -194,7 +194,7 @@ def conlcusion(question,answers):
 
                 OUTPUT FORMAT:
                     ```
-                    {{"ANSWER":[<insert summary here>],"JUSTIFICATION":[<list of text that you used to get the answer>]}}
+                    {{"ANSWER":[<insert any summary here>],"JUSTIFICATION":[<list of any of the text that you used to get the answer>]}}
 
                 """
     return task2
@@ -291,7 +291,7 @@ if question!="":
             #ID={"id":key,"text":value}
             answers_with_ids.append(ID)
         task2=conlcusion(question,answers_with_ids)
-        st.text(task2)
+        #st.text(task2)
         
         #Generate Conclusion/Summary given the answers
         out=query_gemini(task2)
