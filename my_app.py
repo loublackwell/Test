@@ -10,6 +10,8 @@ import google.generativeai as genai
 #Declaration of variables
 global my_key
 global book
+global cwd
+
 cwd=os.getcwd()#Current working Directory
 tika_jar_path=os.path.join("tika_jar_file","tika-app-2.9.3.jar")#Relative path to tika jar file
 file_path = os.path.join(cwd,"en_GC.pdf")#Path to PDF file
@@ -218,6 +220,11 @@ def parse_query(out,verse_dict):
 
 #Set UI
 st.sidebar.title("RAG-Demo")
+
+
+task="how old is the python language"
+A=query_gemini(task)
+st.write(A)
 
 
 # Step 2: Load saved index
