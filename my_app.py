@@ -272,6 +272,6 @@ if question!="":
             answers_with_ids.append(ID)
         task2=conlcusion(question,answers_with_ids)
         out=query_gemini(task2)
-        llm_dict2,answers2,report_dict2=parse_query(out,verse_dict)
+        llm_dict2,answers2,report_dict2,error=parse_query(out,verse_dict)
         st.write(llm_dict2)
 
