@@ -225,7 +225,7 @@ def parse_query(out,verse_dict):
 
 #Set UI
 st.sidebar.title("Blackwell's Document Analyzer")
-
+st.caption("AI-powered insights from *The Great Controversy*")  
 
 
 # Step 2: Load saved index
