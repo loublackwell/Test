@@ -287,7 +287,7 @@ if question!="":
     task=build_prompt(expert,verses)#Build prompt for LLM
     
     out,query_state=query_gemini(task)#HANDLE LLM QUERY ERROR
-    verify_back_ticks=out.count("```")
+    verify_back_ticks=out.find("```")
     st.write( verify_back_ticks)
     st.write(out)
 """"
