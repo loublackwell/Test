@@ -202,6 +202,7 @@ def conlcusion(question,answers):
 
 def parse_query(out,verse_dict):
     #out=out.strip()
+    st.text(type(out))
     error=False
     dict_block={}
     report_dict={}
