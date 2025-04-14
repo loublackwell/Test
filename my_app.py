@@ -176,21 +176,20 @@ def conlcusion(question,answers):
 
                 CONSIDERATIONS:
                  1. No Hallucinations allowed. Stick with completing the task given the provided context.
-                 2. If there are no relevant text, return no relevant text
-                 3. Only use the list of text to search for answers
-                 4. The output should be a valid python dictionary or JSON format
-                 5. Here is an example of a valid python dictionary or JSON output and an example of an invalid python dictionary or invalid JSON output
+                 2. Only use the list of text to search for answers
+                 3. The output should be a valid python dictionary or JSON format
+                 4. Here is an example of a valid python dictionary or JSON output and an example of an invalid python dictionary or invalid JSON output
                      AN EXAMPLE OF VALID PYTHON DICTIONARY OR JSON OUTPUT:
                      {{"ANSWER":"George Washington was an president","JUSTIFICATION":["George washington was the president of United Stated hundreds of years ago"]}}
 
                      AN EXAMPLE OF INVALID PYTHON DICTIONARY OR INVALID JSON OUTPUT:
                      {{"ANSWER":"George Washington was an president","JUSTIFICATION":["George washington was the president of United Stated hundreds of years ago"]
                     
-                 8. Do not provide/derive any answers that were not originally mentioned in the potential answers.
-                 9. List the texts that you used to come to the answers.
-                 10. If the question or task is not clear, state that in the ANSWER when returning your answer.
-                 11. Provide concise answers whenever possible.
-                 12. Remove any duplicate answers.
+                 5. Do not provide/derive any answers that were not originally mentioned in the potential answers.
+                 6. List the texts that you used to come to the answers.
+                 7. If the question or task is not clear, state that in the ANSWER when returning your answer.
+                 8. Provide concise answers whenever possible.
+                 9. Remove any duplicate answers.
                 
 
                 OUTPUT FORMAT:
@@ -294,6 +293,7 @@ if question!="":
         task2=conlcusion(question,answers_with_ids)
         
         #Generate Conclusion/Summary given the answers
+        st.text(task2)
         out=query_gemini(task2)
         st.text(out)
 """
