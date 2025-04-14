@@ -193,8 +193,8 @@ def conlcusion(question,answers):
                     e. Do not include any text outside of the JSON object.
                     f. Ensure that all strings within the arrays are properly formatted and escaped if necessary.
                     g. Do not include any trailing commas.
-                    h. If you are unable to provide the requested information, return an empty JSON object: {{"ANSWER":[],"JUSTIFICATION":[]}}.
-                    i. The final output json or python dictionary should be enclosed between two  triple backticks as shown in the output format.
+                    h. If you are unable to provide the requested information, return an empty JSON object. For example, {{"ANSWER":[],"JUSTIFICATION":[]}}.
+                    i. The final output json or python dictionary should be enclosed between two triple backticks, for example ```{<output dictionary} ```
                     j. All key and value pairs hould be enclosed with double quotes only.
                     
                  7. Do not provide/derive any answers that were not originally mentioned in the potential answers.
