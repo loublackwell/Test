@@ -174,7 +174,7 @@ def conlcusion(question,answers):
                  5. Here is an example of a valid python dictionary or JSON output and an example of an invalid python dictionary or invalid JSON output
                      EXAMPLE OF VALID PYTHON DICTIONARY OR JSON OUTPUT:
                      {{"ANSWER":"George Washington was an president","JUSTIFICATION":["George washington was the president of United Stated hundreds of years ago"]}}
-                    
+
                      EXAMPLE OF INVALID PYTHON DICTIONARY OR INVALID JSON OUTPUT:
                      {{"ANSWER":"George Washington was an president","JUSTIFICATION":["George washington was the president of United Stated hundreds of years ago"]
                  6. For the JSON output to be valid, adhere to the following rules:
@@ -187,6 +187,7 @@ def conlcusion(question,answers):
                     g. Do not include any trailing commas.
                     h. If you are unable to provide the requested information, return an empty JSON object: {{"ANSWER":[],"JUSTIFICATION":[]}}.
                     i. The final output json or python dictionary should be enclise with triple backyicks as shown in the output format.
+                    j. If there are any quotations only use single quotes and not double quotes.
                     
                  7. Do not provide/derive any answers that were not originally mentioned in the potential answers
                  8. List the texts that you used to come to the answers.
@@ -206,7 +207,7 @@ def conlcusion(question,answers):
 def parse_query(out,verse_dict):
     out=out.strip()
     out1=out.replace('\n','')
-    out=out1
+    
     
     error=False
     dict_block={}
