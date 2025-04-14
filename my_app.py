@@ -5,7 +5,8 @@ import streamlit as st
 from sentence_transformers import SentenceTransformer
 import faiss
 import numpy as np
-import google.generativeai as genai
+#import google.generativeai as genai
+from google import genai
 
 #Declaration of variables
 global my_key
@@ -26,8 +27,8 @@ metadata_store = []  # Will store tuples of (id, text, metadata)
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
 my_key={
-                  "authorization":st.secrets["API_KEY"],"content-type":"application/json"
-                  }
+                 "authorization":st.secrets["API_KEY"],"content-type":"application/json"
+                 }
 
 
 
