@@ -289,7 +289,7 @@ if question!="":
     
     #Query question and return a possible answers
     out,query_state=query_gemini(task)
-    #st.text(out)
+    st.text(out)
     
     #out,query_state=retry_query(task)
 
