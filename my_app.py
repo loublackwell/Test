@@ -286,7 +286,8 @@ if question!="":
 
     task=build_prompt(expert,verses)#Build prompt for LLM
     
-    out,query_state=query_gemini(task)#HANDLE LLM QUERY ERROR
+    #Query question and return a possible answer
+    out,query_state=query_gemini(task)
     st.text(out)
     
     #out,query_state=retry_query(task)
@@ -302,7 +303,7 @@ if question!="":
             answers_with_ids.append(ID)
         task2=conlcusion(question,answers_with_ids)
         out=query_gemini(task2)#Generate Conclusion/Summary given the answers
-"""
+
         llm_dict2,answers2,report_dict2,error=parse_query(out,verse_dict)#HANDLE PARSE ERROR
         st.write(llm_dict2)
-"""
+
