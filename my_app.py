@@ -230,7 +230,7 @@ results, verses, IDS, verse_dict = query_texts(question, top_k=25)
 
 task=build_prompt(expert,verses)
 out=query_gemini(task)
-
+st.write(out)
 #print(out)
 llm_dict1,answers1,report_dict1=parse_query(out,verse_dict)
 for key,value in report_dict1.items():
