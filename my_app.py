@@ -200,18 +200,18 @@ def parse_query(out,verse_dict):
                 
     return dict_block,answers,report_dict
 
-"""
+
 # ---- Example Usage ---- #
 
 # Step 1: Extract and index (run only once)
-nlines = 2
-out=extract_text_with_tika_jar(file_path, tika_jar_path)
-text_blocks = out.split('\n' * nlines)
+#nlines = 2
+#out=extract_text_with_tika_jar(file_path, tika_jar_path)
+#text_blocks = out.split('\n' * nlines)
 
 
-index_texts(text_blocks)
-save_index()
-"""
+i#ndex_texts(text_blocks)
+#save_index()
+
 
 
 #Set UI
