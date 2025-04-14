@@ -300,7 +300,7 @@ if question!="":
         st.text(llm_dict1)
 
 
-"""
+
         for key,value in report_dict1.items():
             ID=f"{key}. {value}"
             #ID={"id":key,"text":value}
@@ -314,4 +314,4 @@ if question!="":
 
         llm_dict2,answers2,report_dict2,error=parse_query(out,verse_dict)#HANDLE PARSE ERROR
         st.write(llm_dict2)
-"""
+
