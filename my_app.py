@@ -238,7 +238,7 @@ def parse_query(out,verse_dict):
                             st.text(e)
                             if pydict!="":
                                 st.text(f"Exception:{pydict}")
-                            st.text(type(out))
+                            #st.text(type(out))
                             error=True
         st.text(f"ANSWERS:{answers}")                        
     return dict_block,answers,report_dict,error
