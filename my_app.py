@@ -202,6 +202,7 @@ def conlcusion(question,answers):
 
 def parse_query(out,verse_dict):
     out=str(out)#Force output to be a string in case llm changes output type due hallucination**
+    out = out.replace("“", '"').replace("”", '"')
     out=out.strip()
     error=False
     dict_block={}
@@ -225,7 +226,7 @@ def parse_query(out,verse_dict):
                         st.text(f"PARSE:{pydict}")
                         
                         try:
-                            dict_block=eval(pydict)#Try and read LLM output
+                            dict_block=json.loads(pydict)#Try and read LLM output
                             answers=dict_block.get('ANSWER')
                             if answers!=None:
                 
