@@ -159,30 +159,46 @@ def build_prompt(expert,verses):
 
 
 def conlcusion(question,answers):
-    task2=f"""Review the list of potentials answers to the following question and see if there is answer that 
-             can be found from the list. If there are answers found, summarize in no more  than 5 sentences.
-             QUESTION:
-             {question}. 
-             POTENTIAL ANSWERS:
-             {answers}
+    task2 = f"""Review the list of potential answers to the following question and see if there is an answer that 
+                can be found from the list. If there are answers found, summarize in no more than 5 sentences.
+                QUESTION:
+                {question}. 
+                POTENTIAL ANSWERS:
+                {answers}
 
-             CONSIDERATIONS:
-              1. No Hallucinations allowed. Stick with completing the task given the provided context.
-              2. If there are no relevant text, return no relevant text
-              3. Only use the list of text to serach for answers
-              4. The output should be a valid python dictionary
-              5. Do not provide/derive any answers that were not originally mentioned in the potential answers
-              6. List the texts that you used to come to the answers.
-              7. If the question or task is not clear, state that in the ANSWER when returning your answer.
-              8. Provide concise answers whenever possible.
-              9. Remove any duplicate answers.
+                CONSIDERATIONS:
+                 1. No Hallucinations allowed. Stick with completing the task given the provided context.
+                 2. If there are no relevant text, return no relevant text
+                 3. Only use the list of text to search for answers
+                 4. The output should be a valid python dictionary or JSON format
+                 5. Here is an example of a valid python dictionary or JSON output and an example of an invalid python dictionary or invalid JSON output
+                     EXAMPLE OF VALID PYTHON DICTIONARY OR JSON OUTPUT:
+                     {{"ANSWER":"George Washington was an president","JUSTIFICATION":["George washington was the president of United Stated hundreds of years ago"]}}
+                    
+                     EXAMPLE OF INVALID PYTHON DICTIONARY OR INVALID JSON OUTPUT:
+                     {{"ANSWER":"George Washington was an president","JUSTIFICATION":["George washington was the president of United Stated hundreds of years ago"]
+                 6. For the JSON output to be valid, adhere to the following rules:
+                    a. The output must be a valid JSON object (dictionary) enclosed within curly braces {{}}.
+                    b. The JSON object must contain the keys "ANSWER" and "JUSTIFICATION".
+                    c. The value associated with the "ANSWER" key should be an array of strings.
+                    d. The value associated with the "JUSTIFICATION" key should be an array of strings.
+                    e. Do not include any text outside of the JSON object.
+                    f. Ensure that all strings within the arrays are properly formatted and escaped if necessary.
+                    g. Do not include any trailing commas.
+                    h. If you are unable to provide the requested information, return an empty JSON object: {{"ANSWER":[],"JUSTIFICATION":[]}}.
+                 7. Do not provide/derive any answers that were not originally mentioned in the potential answers
+                 8. List the texts that you used to come to the answers.
+                 9. If the question or task is not clear, state that in the ANSWER when returning your answer.
+                 10. Provide concise answers whenever possible.
+                 11. Remove any duplicate answers.
+                
 
-              OUTPUT FORMAT:
-                 ```
-                 {{"ANSWER":[<insert summary here],"JUSTIFICATION":[<list of text that you used to get the answer]}}
+                OUTPUT FORMAT:
+                    ```
+                    {{"ANSWER":[<insert summary here>],"JUSTIFICATION":[<list of text that you used to get the answer>]}}
 
-            """
-    return task2
+                """
+     return task2
 
 
 def parse_query(out,verse_dict):
