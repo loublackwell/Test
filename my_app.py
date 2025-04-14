@@ -129,8 +129,8 @@ def query_gemini(task):
         response = client.models.generate_content(
             model="gemini-2.0-flash", contents=task
         )
-        test = response.text
-        TEXT=test.replace("\n","\\n")
+        TEXT = response.text
+        
     except Exception as e:
         st.write(f"Unable to query llm: {e}")
         query_state = "error"
@@ -231,7 +231,7 @@ def parse_query(out,verse_dict):
                                     if text in answers:
                                         report_dict[verse]=text
                         except Exception as e:
-                            print(f"Unable to parse llm output: {e}: {out}")
+                            st.write(f"Unable to parse llm output: {e}: {out}")
                             st.text(e)
                             st.write(out)
                             st.text(type(out))
