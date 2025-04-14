@@ -288,8 +288,8 @@ if question!="":
 
     task=build_prompt(expert,verses)#Build prompt for LLM
     
-    #out=query_gemini(task)#HANDLE LLM QUERY ERROR
-    out,query_state=retry_query(task)
+    out=query_gemini(task)#HANDLE LLM QUERY ERROR
+    #out,query_state=retry_query(task)
 
     #Process if there is no error from the LLM
     if query_state!="error":
