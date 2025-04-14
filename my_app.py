@@ -268,7 +268,7 @@ def parse_query(out,verse_dict):
                         pydict=middle_block[json_start:json_end+1]
                         #pydict=pydict1.replace('\\','\\\\')
                         st.text(f"PARSE:{pydict}")
-                       print(pydict)
+                        print(pydict)
 
                         
     return dict_block,answers,report_dict,error
