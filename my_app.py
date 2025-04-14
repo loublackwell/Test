@@ -227,12 +227,13 @@ task="how old is the python language"
 A=query_gemini(task)
 st.write(A)
 
-"""
+
 # Step 2: Load saved index
 expert="""You are a Seventh Day adventist theologian with a PHD in Divinity from Andrews Univeristy in Michigan.
           You also specialize in Ellen G. Whites Writings.  
             """
 
+"""
 load_index()
 answers_with_ids=[]
 # Step 3: Ask a question
