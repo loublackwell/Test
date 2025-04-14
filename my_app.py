@@ -30,6 +30,9 @@ my_key={
                  }
 
 
+expert={
+                 "authorization":st.secrets["EXPERT_KEY"],"content-type":"application/json"
+                 }
 
 
 # ---- Main Functions ---- #
@@ -226,10 +229,8 @@ st.sidebar.title("RAG-Demo")
 
 
 # Step 2: Load saved index
-expert="""You are a Seventh Day adventist theologian with a PHD in Divinity from Andrews Univeristy in Michigan.
-          You also specialize in Ellen G. Whites Writings and you have been a pastor for about 45 years. 
-            """
 
+expert=st.secrets["EXPERT_KEY"]
 
 load_index()
 answers_with_ids=[]
