@@ -32,7 +32,7 @@ my_key={
 
 
 
-# ---- Core Functions ---- #
+# ---- Main Functions ---- #
 
 def extract_text_with_tika_jar(file_path, tika_jar_path):
     try:
@@ -169,7 +169,10 @@ def conlcusion(question,answers):
               3. Only use the list of text to serach for answers
               4. The output should be a valid python dictionary
               5. Do not provide/derive any answers that were not originally mentioned in the potential answers
-              5. List the texts that you used to come to the answers.
+              6. List the texts that you used to come to the answers.
+              7. If the question or task is not clear, state that in the ANSWER when returning your answer.
+              8. Provide concise answers whenever possible.
+              9. Remove any duplicate answers.
 
               OUTPUT FORMAT:
                  ```
@@ -224,7 +227,7 @@ st.sidebar.title("RAG-Demo")
 
 # Step 2: Load saved index
 expert="""You are a Seventh Day adventist theologian with a PHD in Divinity from Andrews Univeristy in Michigan.
-          You also specialize in Ellen G. Whites Writings.  
+          You also specialize in Ellen G. Whites Writings and you have been a pastor for about 45 years. 
             """
 
 
