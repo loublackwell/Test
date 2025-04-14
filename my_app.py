@@ -224,13 +224,13 @@ def parse_query(out,verse_dict):
 
 
 #Set UI
-st.sidebar.title("RAG-Demo")
+st.sidebar.title("Blackwell's Document Analyzer")
 
 
 
 # Step 2: Load saved index
 
-expert=st.secrets["EXPERT_KEY"]
+expert=st.secrets["EXPERT_KEY"]#Title of the virtual expert I am using to evaluate the RAG. For example, expert="Professor of mathematics with 12 years experience teaching."
 
 load_index()
 answers_with_ids=[]
