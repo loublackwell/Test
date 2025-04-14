@@ -312,6 +312,3 @@ if question!="":
         out=query_gemini(task2)
         
         llm_dict2,answers2,report_dict2,error=parse_query(out,verse_dict)#HANDLE PARSE ERROR
-"'"
-        st.write(llm_dict2)
-"""
