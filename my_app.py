@@ -222,10 +222,6 @@ def parse_query(out,verse_dict):
 st.sidebar.title("RAG-Demo")
 
 
-task="how old is the python language"
-A=query_gemini(task)
-st.write(A)
-
 
 # Step 2: Load saved index
 expert="""You are a Seventh Day adventist theologian with a PHD in Divinity from Andrews Univeristy in Michigan.
@@ -243,7 +239,6 @@ if question!="":
 
     task=build_prompt(expert,verses)
     out=query_gemini(task)
-    st.write(out)
     #print(out)
     llm_dict1,answers1,report_dict1=parse_query(out,verse_dict)
     for key,value in report_dict1.items():
