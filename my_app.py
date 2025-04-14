@@ -120,6 +120,8 @@ def query_texts(query_text, top_k):
 
 def query_gemini(task):
     # Query LLM
+    query_state=""
+    TEXT =""
     try:
         # Pass the API key directly as a string, not as a dictionary
         client = genai.Client(api_key=st.secrets["API_KEY"])
@@ -131,8 +133,8 @@ def query_gemini(task):
         TEXT=test.replace("\n","\\n")
     except Exception as e:
         st.write(f"Unable to query llm: {e}")
-        TEXT = "error"
-    return TEXT
+        query_state = "error"
+    return TEXT,query_state
 
 
 def build_prompt(expert,verses):
@@ -244,9 +246,18 @@ def parse_query(out,verse_dict):
                         
     return dict_block,answers,report_dict,error
 
+def retry_query(task):
+    #Query LLM and retry twice if there is an error.
+    error_counter=0
+    query_state="error":
+        while query_state=="error" and error_counter<3:
+            error_counter+=1
+            out,query_state=query_gemini(task)#Query LLM
+        return out,query_state
+        
 
-# ---- Example Usage ---- #
 
+# ---- Example Indexing Usage ---- #
 # Step 1: Extract and index (run only once)
 #nlines = 2
 #out=extract_text_with_tika_jar(file_path, tika_jar_path)
@@ -276,7 +287,9 @@ if question!="":
     results, verses, IDS, verse_dict = query_texts(question, top_k=25)
 
     task=build_prompt(expert,verses)#Build prompt for LLM
-    out=query_gemini(task)
+    
+    #out=query_gemini(task)#HANDLE LLM QUERY ERROR
+    out=retry_query(task)
 
     #Process if there is no error from the LLM
     if out!="error:
@@ -288,6 +301,6 @@ if question!="":
             answers_with_ids.append(ID)
         task2=conlcusion(question,answers_with_ids)
         out=query_gemini(task2)#Generate Conclusion/Summary given the answers
-        llm_dict2,answers2,report_dict2,error=parse_query(out,verse_dict)
+        llm_dict2,answers2,report_dict2,error=parse_query(out,verse_dict)#HANDLE PARSE ERROR
         st.write(llm_dict2)
 
