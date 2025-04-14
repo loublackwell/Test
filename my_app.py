@@ -289,10 +289,10 @@ if question!="":
     task=build_prompt(expert,verses)#Build prompt for LLM
     
     #out=query_gemini(task)#HANDLE LLM QUERY ERROR
-    out=retry_query(task)
+    out,query_state=retry_query(task)
 
     #Process if there is no error from the LLM
-    if out!="error:
+    if query_state!="error:
         #Attempt to parse LLM output
         llm_dict1,answers1,report_dict1,error=parse_query(out,verse_dict)#Query LLM
         for key,value in report_dict1.items():
