@@ -209,7 +209,7 @@ def parse_query(out,verse_dict):
 #text_blocks = out.split('\n' * nlines)
 
 
-i#ndex_texts(text_blocks)
+#index_texts(text_blocks)
 #save_index()
 
 
