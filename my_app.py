@@ -131,8 +131,7 @@ def query_gemini(task):
         TEXT=test.replace("\n","\\n")
     except Exception as e:
         st.write(f"Unable to query llm: {e}")
-        response = ""
-        TEXT = ""
+        TEXT = "error"
     return TEXT
 
 
@@ -240,9 +239,9 @@ def parse_query(out,verse_dict):
                     except Exception as e:
                         print(f"Unable to parse llm output: {e}: {out}")
                         st.text(e)
-                        st.write(out)
-                        
+                        st.write(out)                       
                         error=True
+                        
     return dict_block,answers,report_dict,error
 
 
@@ -267,27 +266,28 @@ st.caption("AI-powered insights from *The Great Controversy*")
 # Step 2: Load saved index
 
 expert=st.secrets["EXPERT_KEY"]#Title of the virtual expert I am using to evaluate the RAG. For example, expert="Professor of mathematics with 12 years experience teaching."
-
+error_counter=0
 load_index()
 answers_with_ids=[]
-error=False
+error=True
 # Step 3: Ask a question
-#question = "who is the antichrist"
 question=st.sidebar.text_input("Enter Question")
 if question!="":
     results, verses, IDS, verse_dict = query_texts(question, top_k=25)
 
-    task=build_prompt(expert,verses)
+    task=build_prompt(expert,verses)#Build prompt for LLM
     out=query_gemini(task)
-    #print(out)
-    llm_dict1,answers1,report_dict1,error=parse_query(out,verse_dict)
-    
-    for key,value in report_dict1.items():
-        ID=f"{key}. {value}"
-        #ID={"id":key,"text":value}
-        answers_with_ids.append(ID)
-    task2=conlcusion(question,answers_with_ids)
-    out=query_gemini(task2)
-    llm_dict2,answers2,report_dict2,error=parse_query(out,verse_dict)
-    st.write(llm_dict2)
+
+    #Process if there is no error from the LLM
+    if out!="error:
+        #Attempt to parse LLM output
+        llm_dict1,answers1,report_dict1,error=parse_query(out,verse_dict)#Query LLM
+        for key,value in report_dict1.items():
+            ID=f"{key}. {value}"
+            #ID={"id":key,"text":value}
+            answers_with_ids.append(ID)
+        task2=conlcusion(question,answers_with_ids)
+        out=query_gemini(task2)#Generate Conclusion/Summary given the answers
+        llm_dict2,answers2,report_dict2,error=parse_query(out,verse_dict)
+        st.write(llm_dict2)
 
