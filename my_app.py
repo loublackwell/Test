@@ -130,7 +130,7 @@ def query_gemini(task):
             model="gemini-2.0-flash", contents=task
         )
         TEXT = response.text
-        
+        st.text(f"LLM:{TEXT}")
     except Exception as e:
         st.write(f"Unable to query llm: {e}")
         query_state = "error"
@@ -289,7 +289,7 @@ if question!="":
     
     #Query question and return a possible answers
     out,query_state=query_gemini(task)
-    st.text(out)
+    
     
     #out,query_state=retry_query(task)
 
