@@ -288,7 +288,7 @@ if question!="":
     
     #Query question and return a possible answers
     out,query_state=query_gemini(task)
-    st.text(out)
+    #st.text(out)
     
     #out,query_state=retry_query(task)
 
@@ -296,7 +296,7 @@ if question!="":
     if query_state!="error":
         #Attempt to parse LLM output
         llm_dict1,answers1,report_dict1,error=parse_query(out,verse_dict)#Parse answers from LLM.
-        st.write(llm_dict1)
+       st.write(llm_dict1)
 
         for key,value in report_dict1.items():
             ID=f"{key}. {value}"
