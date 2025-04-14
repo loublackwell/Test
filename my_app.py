@@ -289,9 +289,9 @@ if question!="":
     
     #Query question and return a possible answers
     out,query_state=query_gemini(task)
+    st.text(query_state)
     
 """   
-    #out,query_state=retry_query(task)
 
     #Process if there is no error from the LLM
     if query_state!="error":
