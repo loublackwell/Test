@@ -290,7 +290,7 @@ if question!="":
     #Query question and return a possible answers
     out,query_state=query_gemini(task)
     
-    
+ """   
     #out,query_state=retry_query(task)
 
     #Process if there is no error from the LLM
@@ -313,3 +313,4 @@ if question!="":
         out=query_gemini(task2)
         
         llm_dict2,answers2,report_dict2,error=parse_query(out,verse_dict)#HANDLE PARSE ERROR
+"""
