@@ -233,7 +233,7 @@ def parse_query(out,verse_dict):
                     except Exception as e:
                         print(f"Unable to parse llm output: {e}: {out}")
                         st.text(e)
-                        st.write(out.replace('"',"'")
+                        st.write(out.replace('"',"'"))
                         
                         error=True
     return dict_block,answers,report_dict,error
