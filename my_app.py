@@ -127,7 +127,8 @@ def query_gemini(task):
         response = client.models.generate_content(
             model="gemini-2.0-flash", contents=task
         )
-        TEXT = response.text
+        test = response.text
+        TEXT=test.replace("\n","\\n")
     except Exception as e:
         st.write(f"Unable to query llm: {e}")
         response = ""
