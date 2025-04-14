@@ -93,8 +93,7 @@ def query_texts(query_text, top_k):
 
     for i in indices[0]:
         ID=metadata_store[i][0]#ID
-        doc1=metadata_store[i][1].strip().replace("\n","")#Document
-        doc=doc1.replace('"',"`")                      
+        doc=metadata_store[i][1].strip().replace("\n","")#Document                 
         metadata=metadata_store[i][2]
         ids.append(ID)
         documents.append(doc)
@@ -302,6 +301,7 @@ if question!="":
 
 
         for key,value in report_dict1.items():
+            value=value.replace('"',"`")
             ID=f"{key}. {value}"
             #ID={"id":key,"text":value}
             answers_with_ids.append(ID)
