@@ -206,7 +206,7 @@ def conlcusion(question,answers):
 def parse_query(out,verse_dict):
     out=out.strip()
     out1=out.replace('\n','')
-    out = out1.replace('"',"'")#Escape quotes that are in the original output
+    out=out1
     
     error=False
     dict_block={}
