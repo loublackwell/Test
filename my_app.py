@@ -297,19 +297,21 @@ if question!="":
     if query_state!="error":
         #Attempt to parse LLM output
         llm_dict1,answers1,report_dict1,error=parse_query(out,verse_dict)#Parse answers from LLM.
-        #st.text(llm_dict1)
+        st.text(llm_dict1)
 
+
+"""
         for key,value in report_dict1.items():
             ID=f"{key}. {value}"
             #ID={"id":key,"text":value}
             answers_with_ids.append(ID)
         task2=conlcusion(question,answers_with_ids)
         #st.text(task2)
-        
+    
         #Generate Conclusion/Summary given the answers
         out=query_gemini(task2)
         #st.text(out)
 
         llm_dict2,answers2,report_dict2,error=parse_query(out,verse_dict)#HANDLE PARSE ERROR
         st.write(llm_dict2)
-
+"""
