@@ -5,7 +5,7 @@ import streamlit as st
 from sentence_transformers import SentenceTransformer
 import faiss
 import numpy as np
-from google import genai
+import google.generativeai as genai
 
 #Declaration of variables
 global my_key
