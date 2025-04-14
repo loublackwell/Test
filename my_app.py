@@ -222,7 +222,7 @@ def parse_query(out,verse_dict):
                     if json_end>-1:
                         pydict=middle_block[json_start:json_end+1]
                         #pydict=pydict1.replace('\\','\\\\')
-                        st.text(pydict)
+                        st.text(f"PARSE:{pydict}")
                         
                         try:
                             dict_block=json.loads(pydict)#Try and read LLM output
@@ -310,7 +310,6 @@ if question!="":
     
         #Generate Conclusion/Summary given the answers
         out=query_gemini(task2)
-        #st.text(out)
 """
         llm_dict2,answers2,report_dict2,error=parse_query(out,verse_dict)#HANDLE PARSE ERROR
         st.write(llm_dict2)
