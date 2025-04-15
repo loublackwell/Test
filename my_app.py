@@ -12,6 +12,7 @@ from google import genai
 global my_key
 global book
 global cwd
+import ast
 
 cwd=os.getcwd()#Current working Directory
 tika_jar_path=os.path.join("tika_jar_file","tika-app-2.9.3.jar")#Relative path to tika jar file
@@ -25,13 +26,14 @@ metadata_store = []  # Will store tuples of (id, text, metadata)
 # Initialize sentence transformer model
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
+
 my_key={
                  "authorization":st.secrets["API_KEY"],"content-type":"application/json"
                  }
 
 
 expert={
-                 "authorization":st.secrets["EXPERT_KEY"],"content-type":"application/json"
+                "authorization":st.secrets["EXPERT_KEY"],"content-type":"application/json"
                  }
 
 
@@ -124,12 +126,13 @@ def query_gemini(task):
     try:
         # Pass the API key directly as a string, not as a dictionary
         client = genai.Client(api_key=st.secrets["API_KEY"])
+        #client = genai.Client(api_key=my_key)
 
         response = client.models.generate_content(
             model="gemini-2.0-flash", contents=task
         )
-        TEXT = response.text
-        st.text(f"LLM:{TEXT}")
+        TEXT = str(response.text)
+        #st.text(f"LLM:{TEXT}")
     except Exception as e:
         st.write(f"Unable to query llm: {e}")
         query_state = "error"
@@ -153,6 +156,7 @@ def build_prompt(expert,verses):
              3. Only use the list of text to serach for answers
              4. The output should be a valid python dictionary.
              5. Do not escape any of the characters.
+             6. Use single quotes for all fields inside the dictionary
              
              
              OUTPUT FORMAT:
@@ -178,105 +182,67 @@ def conlcusion(question,answers):
                  1. No Hallucinations allowed. Stick with completing the task given the provided context.
                  2. Only use the list of text to search for answers
                  3. The output should be a valid python dictionary or JSON format
-                 4. Here is an example of a valid python dictionary or JSON output and an example of an invalid python dictionary or invalid JSON output
-                     AN EXAMPLE OF VALID PYTHON DICTIONARY OR JSON OUTPUT:
-                     {{"ANSWER":"George Washington was an president","JUSTIFICATION":["George washington was the president of United Stated hundreds of years ago"]}}
-
-                     AN EXAMPLE OF INVALID PYTHON DICTIONARY OR INVALID JSON OUTPUT:
-                     {{"ANSWER":"George Washington was an president","JUSTIFICATION":["George washington was the president of United Stated hundreds of years ago"]
-                    
-                 5. Do not provide/derive any answers that were not originally mentioned in the potential answers.
-                 6. List the texts that you used to come to the answers.
-                 7. If the question or task is not clear, state that in the ANSWER when returning your answer.
-                 8. Provide concise answers whenever possible.
-                 9. Remove any duplicate answers.
+                 4. Do not provide/derive any answers that were not originally mentioned in the potential answers.
+                 5. List the texts that you used to come to the answers.
+                 6. If the question or task is not clear, state that in the ANSWER when returning your answer.
+                 7. Provide concise answers whenever possible.
+                 8. Remove any duplicate answers.
+                 9. Use single quotes for all fields inside the dictionary
+                 10. replace all quotations with and * symbol.
+                 11. Only return one dictionary
+                 12. Use double quotate symbol for all key value pairs.
+            
                 
 
                 OUTPUT FORMAT:
                     ```
-                    {{"ANSWER":[<insert any summary here>],"JUSTIFICATION":[<list of any of the text that you used to get the answer>]}}
+                    {{"ANSWER":[<insert any summary here>],"JUSTIFICATION":["<list of any of the text that you used to get the answer>",....]}}
 
                 """
     return task2
 
 
+def fix_to_valid_json(python_dict_str):
+    try:
+        # Safely evaluate the string as a Python dict
+        python_dict = ast.literal_eval(python_dict_str)
+        # Convert to a JSON-valid string
+        json_str = json.dumps(python_dict)
+        return json_str
+    except Exception as e:
+        print("Error:", e)
+        return None
+
+    
 def parse_query(out,verse_dict):
-    out=str(out)#Force output to be a string in case llm changes output type due hallucination**
-    out = out.replace("“", '"').replace("”", '"')
-    out=out.strip()
+    #This function parses the LLM output
     error=False
+    pydict={}
     dict_block={}
     report_dict={}
     answers=[]
-    pydict=""
-    start=out.find("```")
-    if start>-1:
-        start_block=out[start+3:]
-        if start>-1:
-            end_block=start_block.find("```")
-            if end_block>-1:
-                middle_block=start_block[:end_block]
-                #st.text(middle_block)
-                json_start=middle_block.find("{")
-                if json_start>-1:
-                    json_end=middle_block.rfind("}")
-                    if json_end>-1:
-                        pydict=middle_block[json_start:json_end+1]
-                        #pydict=pydict1.replace('\\','\\\\')
-                        st.text(f"PARSE:{pydict}")
-                        
-                        try:
-                            dict_block=json.loads(pydict)#Try and read LLM output
-                            answers=dict_block.get('ANSWER')
-                            if answers!=None:
-                
-                                for text,verse in verse_dict.items():
-                                    if text in answers:
-                                        report_dict[verse]=text
-                        except Exception as e:
-                            st.write(f"Unable to parse llm output: {e}: {out}")
-                            st.text(e)
-                            if pydict!="":
-                                st.text(f"Exception:{pydict}")
-                            #st.text(type(out))
-                            error=True
-        st.text(f"ANSWERS:{answers}")                        
+    out=str(out)#Force LLM output to be a string in case llm changes output type due hallucination**
+    out=out.replace("\\n","")
+    start=out.find("{")
+    end=out.find("}")
+    if start and end>-1:
+        block=out[start:end+1]
+        #st.write(block)
+        block=fix_to_valid_json(block)
+        if block!=None:
+            #st.write(block)
+            try:
+                dict_block=json.loads(block)
+                #st.write(dict_block)
+                answers=dict_block.get('ANSWER')
+                if answers!=None:
+                    for text,verse in verse_dict.items():
+                        if text in answers:
+                            report_dict[verse]=text              
+            except Exception as e:
+                print(e)
+                error=True
     return dict_block,answers,report_dict,error
-
-
-def parse_query(out,verse_dict):
-    out=str(out)#Force output to be a string in case llm changes output type due hallucination**
-    out = out.replace("“", '"').replace("”", '"')
-    out=out.strip()
-    error=False
-    dict_block={}
-    report_dict={}
-    answers=[]
-    pydict=""
-    start=out.find("```")
-    if start>-1:
-        start_block=out[start+3:]
-        if start>-1:
-            end_block=start_block.find("```")
-            if end_block>-1:
-                middle_block=start_block[:end_block]
-                #st.text(middle_block)
-                json_start=middle_block.find("{")
-                if json_start>-1:
-                    json_end=middle_block.rfind("}")
-                    if json_end>-1:
-                        pydict=middle_block[json_start:json_end+1]
-                        #pydict=pydict1.replace('\\','\\\\')
-                        st.text(f"PARSE1:{pydict}")
-                        print(pydict)
-
-                        
-    return dict_block,answers,report_dict,error
-
-
-
-
-
 
 
 def retry_query(task):
@@ -324,28 +290,25 @@ if question!="":
     
     #Query question and return a possible answers
     out,query_state=query_gemini(task)
-    st.text(f"STATE:{query_state}")
+    #st.text(f"STATE:{query_state}")
     
-
 
     #Process if there is no error from the LLM
     if query_state!="error":
         #Attempt to parse LLM output
         llm_dict1,answers1,report_dict1,error=parse_query(out,verse_dict)#Parse answers from LLM.
         #st.text(llm_dict1)
-"""
-
-
         for key,value in report_dict1.items():
             value=value.replace("\'","'")
             ID=f"{key}. {value}"
             #ID={"id":key,"text":value}
             answers_with_ids.append(ID)
         task2=conlcusion(question,answers_with_ids)
-        #st.text(task2)
-    
         #Generate Conclusion/Summary given the answers
-        out=query_gemini(task2)
-        
-        llm_dict2,answers2,report_dict2,error=parse_query(out,verse_dict)#HANDLE PARSE ERROR
-"""
+        #st.write(task2)
+        out,query_state=query_gemini(task2)
+        if query_state!="error":
+            llm_dict2,answers2,report_dict2,error=parse_query(out,verse_dict)#HANDLE PARSE ERROR
+            st.json(llm_dict2)  #Displays the conclusion and records to back the summary
+        else:
+            st.write("No matching records found to answer your query")
